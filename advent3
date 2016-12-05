@@ -1,0 +1,15 @@
+#!/bin/bash
+#while read -r a b c; do
+  #(( a + b > c && a + c > b && b + c > a && i++ ))
+#done
+#echo $i
+while
+  read -r a1 a2 a3;
+  read -r b1 b2 b3;
+  read -r c1 c2 c3;
+do
+  (( a1 + b1 > c1 && a1 + c1 > b1 && b1 + c1 > a1 && i++ ))
+  (( a2 + b2 > c2 && a2 + c2 > b2 && b2 + c2 > a2 && i++ ))
+  (( a3 + b3 > c3 && a3 + c3 > b3 && b3 + c3 > a3 && i++ ))
+done
+echo $i
