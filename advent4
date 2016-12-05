@@ -1,0 +1,56 @@
+#!/bin/bash
+#while read -r; do
+  #[[ $REPLY =~ (.*)-([0-9]+)\[(.*)\] ]]
+  #name=${BASH_REMATCH[1]//-}
+  #id=${BASH_REMATCH[2]}
+  #cksum=${BASH_REMATCH[3]}
+  #declare -A letters=()
+  #for (( i = 0; i < ${#name}; i++ )) do
+    #(( letters[${name:i:1}]++ ))
+  #done
+
+  #expected=$(
+  #for l in "${!letters[@]}"; do echo ${letters[$l]} $l; done |
+    #sort -k1,1rn -k2,2 | cut -d' ' -f2 | head -n "${#cksum}" | tr -dc a-z
+  #)
+  #[[ $expected = $cksum ]] && (( sum += id ))
+#done
+#echo $sum
+
+
+# part 2 - filter
+
+#while read -r; do
+  #[[ $REPLY =~ (.*)-([0-9]+)\[(.*)\] ]]
+  #name=${BASH_REMATCH[1]//-}
+  #id=${BASH_REMATCH[2]}
+  #cksum=${BASH_REMATCH[3]}
+  #declare -A letters=()
+  #for (( i = 0; i < ${#name}; i++ )) do
+    #(( letters[${name:i:1}]++ ))
+  #done
+
+  #expected=$(
+  #for l in "${!letters[@]}"; do echo ${letters[$l]} $l; done |
+    #sort -k1,1rn -k2,2 | cut -d' ' -f2 | head -n "${#cksum}" | tr -dc a-z
+  #)
+  #[[ $expected = $cksum ]] && echo $REPLY
+#done
+
+declare -A letters=(
+[a]=0 [b]=1 [c]=2 [d]=3 [e]=4 [f]=5 [g]=6 [h]=7 [i]=8 [j]=9 [k]=10 [l]=11
+[m]=12 [n]=13 [o]=14 [p]=15 [q]=16 [r]=17 [s]=18 [t]=19 [u]=20 [v]=21 [w]=22
+[x]=23 [y]=24 [z]=25
+)
+alphabet=abcdefghijklmnopqrstuvwxyz
+while read -r; do
+  [[ $REPLY =~ (.*)-([0-9]+)\[(.*)\] ]]
+  name=${BASH_REMATCH[1]}
+  id=${BASH_REMATCH[2]}
+
+
+  for (( i = 0; i < ${#name}; i++ )) do
+    [[ ${name:i:1} = - ]] && echo -n ' ' || echo -n "${alphabet:(letters[${name:i:1}]+id)%26:1}"
+  done
+  echo " $id"
+done | grep north
